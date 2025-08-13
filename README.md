@@ -26,15 +26,27 @@ cutting-edge tools for platform engineering, automation.
   [https://argo-cd.readthedocs.io/en/stable](https://argo-cd.readthedocs.io/en/stable)
 - **Argo Workflow** — Kubernetes-native workflow engine
   [https://argoproj.github.io/workflows/](https://argoproj.github.io/workflows/)
+
 ---
 
 ## 📚 Documentation
 
-Navigate the documentation to understand the platform architecture, setup, and components:
+- [🏗️ Project Architecture](docs/project_architecture.md)
+- [💻 Project Deployment](docs/project_deployment.md)
 
-- [🏗️ Architecture](docs/project_architecture.md)
-- [💻 Deployment](docs/project_deployment.md)
-- [🚀 TODO](docs/project_todo.md)
+---
+
+## ✅ Project TODOs
+
+- [x] basi pipeline for testing in github actions
+- [x] create base template for ArgoCD
+- [x] add postgresql for backend
+- [x] deploy simple MinIO to store documents
+- [ ] deploy Nginx for routing
+- [ ] create ingress for backend
+- [ ] encrypt secrets in git repo
+- [ ] make sure that argo workflows have limited access to other
+- [ ] add litter for yaml
 
 ---
 

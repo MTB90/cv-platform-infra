@@ -20,9 +20,9 @@ cutting-edge tools for platform engineering, automation.
 
 ### 🔧 DevOps / GitOps
 
-- **Minikube** — Local Kubernetes cluster  
+- **Minikube** — Local Kubernetes cluster
   [https://minikube.sigs.k8s.io/docs](https://minikube.sigs.k8s.io/docs)
-- **ArgoCD** — Declarative GitOps continuous delivery  
+- **ArgoCD** — Declarative GitOps continuous delivery
   [https://argo-cd.readthedocs.io/en/stable](https://argo-cd.readthedocs.io/en/stable)
 - **Argo Workflow** — Kubernetes-native workflow engine
   [https://argoproj.github.io/workflows/](https://argoproj.github.io/workflows/)

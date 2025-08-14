@@ -1,3 +1,4 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -18,7 +19,7 @@ spec:
       project: cv-platform
       syncPolicy:
         syncOptions:
-          - CreateNamespace=true
+        - CreateNamespace=true
         automated:
           prune: true
           selfHeal: true
@@ -33,7 +34,7 @@ spec:
         targetRevision: main
         path: '{{.path.path}}'
         kustomize:
-          namespace: 'cv-platform'
+          namespace: cv-platform
       destination:
         server: https://kubernetes.default.svc
-        namespace: 'cv-platform'
+        namespace: cv-platform

@@ -22,8 +22,8 @@
 2) Deploy Project using ArgoCD:
 
 ```bash
-  # First, the ArgoCD CRDs will be installed. Then, the bootstrap process will be deployed, 
-  # which includes the installation of ArgoCD itself, followed by the creation of all necessary resources, 
+  # First, the ArgoCD CRDs will be installed. Then, the bootstrap process will be deployed,
+  # which includes the installation of ArgoCD itself, followed by the creation of all necessary resources,
   # such as AppProject and ApplicationSet.
   cd ../
   make cv-platform-apply

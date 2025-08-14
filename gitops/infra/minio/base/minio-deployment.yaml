@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,28 +17,28 @@ spec:
         app: minio
     spec:
       containers:
-        - name: minio
-          image: quay.io/minio/minio:latest
-          ports:
-            - name: web
-              containerPort: 9090
-            - name: api
-              containerPort: 9000
-          command:
-            - /bin/bash
-            - -c
-          args:
-            - minio server /data --console-address :9090
-          volumeMounts:
-            - mountPath: /data
-              name: minio-local-volume
-          envFrom:
-            - secretRef:
-                name: minio-secret
-          resources: {}
+      - name: minio
+        image: quay.io/minio/minio:latest
+        ports:
+        - name: web
+          containerPort: 9090
+        - name: api
+          containerPort: 9000
+        command:
+        - /bin/bash
+        - -c
+        args:
+        - minio server /data --console-address :9090
+        volumeMounts:
+        - mountPath: /data
+          name: minio-local-volume
+        envFrom:
+        - secretRef:
+            name: minio-secret
+        resources: {}
 
       volumes:
-        - name: minio-local-volume
-          hostPath: # MinIO generally recommends using locally-attached volumes
-            path: /mnt/minio/data # Specify a path to a local drive or volume on the Kubernetes worker node
-            type: DirectoryOrCreate # The path to the last directory must exist
+      - name: minio-local-volume
+        hostPath:           # MinIO generally recommends using locally-attached volumes
+          path: /mnt/minio/data             # Specify a path to a local drive or volume on the Kubernetes worker node
+          type: DirectoryOrCreate             # The path to the last directory must exist

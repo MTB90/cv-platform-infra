@@ -7,15 +7,15 @@ interaction with other components is described. The architecture revolves around
 ** for background processing, **CrewAI** for agent-based task execution, and various storage systems.
 
 ```
-                    
+
                                                                             Client
-                                                                             ▲ 
+                                                                             ▲
                                                                              │  │     upload file
                                                                 http         │  │ pre-signed-url (http)
-                                                        ┌────────────────────┘  └──────────────────────┐ 
-                                                        │                                              │  
-                                                        ▼                                              │  
-                                                 ┌────────────────┐                                    │  
+                                                        ┌────────────────────┘  └──────────────────────┐
+                                                        │                                              │
+                                                        ▼                                              │
+                                                 ┌────────────────┐                                    │
       ┌────────────────┐                         │    (api/v1)    │                                    ▼
       │  Argo Workflow │                         │--------------- │     generate pre-signed-url    ┌─────────┐
       │                │ <─────── k8s req ───────│  cv-platform   │ <──── minio async client ────> │  MinIO  │
@@ -32,13 +32,13 @@ interaction with other components is described. The architecture revolves around
             │                                    │ (Persistent) │                                       │
             │                                    └──────────────┘                                       │
             │                                                                                           │
-            │                                                                                           │ 
-            ▼                                                                                           │             
+            │                                                                                           │
+            ▼                                                                                           │
        ┌────────────┐                                                                                   │
-       │  Workflow  │<──────────────────────────────────────────────────────────────────────────────────┘                                  
-       │------------│                            
+       │  Workflow  │<──────────────────────────────────────────────────────────────────────────────────┘
+       │------------│
        │   CrewAI   │
-       └────────────┘                          
+       └────────────┘
 ```
 
 ### Task Flow:

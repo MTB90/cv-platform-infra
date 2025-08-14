@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,18 +19,16 @@ spec:
       serviceAccountName: backend
       initContainers:
       - image: cv-platform-backend
-        imagePullPolicy: IfNotPresent
         name: migration
-        command: ["alembic", "upgrade", "head"]
+        command: [alembic, upgrade, head]
         envFrom:
         - configMapRef:
-           name: backend-cm
+            name: backend-cm
         - secretRef:
             name: backend-db
         resources: {}
       containers:
       - image: cv-platform-backend
-        imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
             path: /healthz
@@ -37,12 +36,12 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 3
         ports:
-          - name: api
-            containerPort: 8000
+        - name: api
+          containerPort: 8000
         name: api
         envFrom:
         - configMapRef:
-           name: backend-cm
+            name: backend-cm
         - secretRef:
             name: backend-db
         resources: {}

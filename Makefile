@@ -1,7 +1,22 @@
 SHELL := /bin/bash
 
 MINIO:=mc
+VENV:=.venv
+SYSTEM_PYTHON=python3.12
+PYTHON:=$(VENV)/bin/python3
+PIP:=$(VENV)/bin/pip
+PRE-COMMIT:=$(VENV)/bin/pre-commit
 
+$(VENV):
+	$(SYSTEM_PYTHON) -m venv .venv
+
+.PHONY: setup
+setup: $(VENV)
+	$(PIP) install --upgrade pip
+	$(PIP) install -r requirements.txt
+	pre-commit install
+
+############## Minikube ##############
 .PHONY:minikube-start
 minikube-start:
 	minikube start --profile cv-platform-minikube --gpus all --driver docker --container-runtime docker --cpus=8 --memory=16384
@@ -19,6 +34,7 @@ minikube-delete:
 minikube-dashboard:
 	minikube dashboard --profile cv-platform-minikube
 
+############## ArgoCD ##############
 .PHONY:argocd-crds
 argocd-crds:
 	kubectl apply -k https://github.com/argoproj/argo-cd/manifests/crds\?ref\=stable
@@ -27,6 +43,16 @@ argocd-crds:
 argocd-port-forward:
 	kubectl port-forward service/argocd-server 8080:http -n argocd
 
+.PHONY:argocd-init-password
+argocd-init-password:
+	kubectl get secrets argocd-initial-admin-secret -n argocd -o jsonpath='{.data.password}' | base64 --decode
+
+################ Argo ################
+.PHONY:argo-ui-token
+argo-ui-token:
+	kubectl get secrets argo-ui -n cv-platform -o jsonpath='{.data.token}' | base64 --decode
+
+################ Minio ################
 .PHONY:minio-web-port-forward
 minio-web-port-forward:
 	kubectl port-forward service/minio 9090:web -n cv-platform
@@ -41,14 +67,7 @@ minio-configure-bucket:
 	@$(MINIO) mb local/minio-platform-docs || echo "Bucket already exist"
 	@$(MINIO) event add local/minio-platform-docs arn:minio:sqs::DOC_STATUS:webhook --event put || echo "Webhook already exist"
 
-.PHONY:argocd-init-password
-argocd-init-password:
-	kubectl get secrets argocd-initial-admin-secret -n argocd -o jsonpath='{.data.password}' | base64 --decode
-
-.PHONY:argo-ui-token
-argo-ui-token:
-	kubectl get secrets argo-ui -n cv-platform -o jsonpath='{.data.token}' | base64 --decode
-
+############## CV Platform ##############
 .PHONY:cv-platform-apply
 cv-platform-apply: argocd-crds
 	kustomize build gitops/bootstrap/overlays/default | kubectl apply -f -

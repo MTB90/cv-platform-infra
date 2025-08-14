@@ -42,11 +42,12 @@ cutting-edge tools for platform engineering, automation.
 - [x] create base template for ArgoCD
 - [x] add postgresql for backend
 - [x] deploy simple MinIO to store documents
+- [x] add litter for yaml
 - [ ] deploy Nginx for routing
 - [ ] create ingress for backend
 - [ ] encrypt secrets in git repo
 - [ ] make sure that argo workflows have limited access to other
-- [ ] add litter for yaml
+
 
 ---
 

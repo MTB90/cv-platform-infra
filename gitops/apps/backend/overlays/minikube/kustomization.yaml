@@ -13,3 +13,8 @@ secretGenerator:
 
 resources:
 - ../../base
+
+images:
+  - name: cv-platform-backend
+    newName: mtb90/cv-platform-backend
+    newTag: 0.0.1

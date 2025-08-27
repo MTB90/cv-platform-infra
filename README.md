@@ -43,6 +43,7 @@ cutting-edge tools for platform engineering, automation.
 - [x] add postgresql for backend
 - [x] deploy simple MinIO to store documents
 - [x] add litter for yaml
+- [ ] switch from Argo to Temporal
 - [ ] deploy Nginx for routing
 - [ ] create ingress for backend
 - [ ] encrypt secrets in git repo
